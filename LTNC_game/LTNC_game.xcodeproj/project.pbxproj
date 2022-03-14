@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0396770A27D514A200E0D2EF /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0396770927D514A200E0D2EF /* main.cpp */; };
+		0396771227D514BE00E0D2EF /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0396771127D514BE00E0D2EF /* SDL2.framework */; };
+		0396771627D514D300E0D2EF /* SDL2_image.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0396771527D514D300E0D2EF /* SDL2_image.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +27,8 @@
 /* Begin PBXFileReference section */
 		0396770627D514A200E0D2EF /* LTNC_game */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = LTNC_game; sourceTree = BUILT_PRODUCTS_DIR; };
 		0396770927D514A200E0D2EF /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		0396771127D514BE00E0D2EF /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
+		0396771527D514D300E0D2EF /* SDL2_image.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_image.framework; path = ../../../../../../../../Library/Frameworks/SDL2_image.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +36,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0396771227D514BE00E0D2EF /* SDL2.framework in Frameworks */,
+				0396771627D514D300E0D2EF /* SDL2_image.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -43,6 +49,7 @@
 			children = (
 				0396770827D514A200E0D2EF /* LTNC_game */,
 				0396770727D514A200E0D2EF /* Products */,
+				0396771027D514BD00E0D2EF /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -60,6 +67,15 @@
 				0396770927D514A200E0D2EF /* main.cpp */,
 			);
 			path = LTNC_game;
+			sourceTree = "<group>";
+		};
+		0396771027D514BD00E0D2EF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0396771527D514D300E0D2EF /* SDL2_image.framework */,
+				0396771127D514BE00E0D2EF /* SDL2.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -241,6 +257,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -249,6 +269,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

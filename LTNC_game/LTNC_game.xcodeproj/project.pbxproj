@@ -7,9 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0318453827F6E8A600223F29 /* C_function.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0318453627F6E8A600223F29 /* C_function.cpp */; };
 		0396770A27D514A200E0D2EF /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0396770927D514A200E0D2EF /* main.cpp */; };
 		0396771227D514BE00E0D2EF /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0396771127D514BE00E0D2EF /* SDL2.framework */; };
 		0396771627D514D300E0D2EF /* SDL2_image.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0396771527D514D300E0D2EF /* SDL2_image.framework */; };
+		03F6F01C27EF11AE0077B26B /* SDL_function.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03F6F01A27EF11AE0077B26B /* SDL_function.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,10 +27,14 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0318453627F6E8A600223F29 /* C_function.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = C_function.cpp; sourceTree = "<group>"; };
+		0318453727F6E8A600223F29 /* C_function.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = C_function.hpp; sourceTree = "<group>"; };
 		0396770627D514A200E0D2EF /* LTNC_game */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = LTNC_game; sourceTree = BUILT_PRODUCTS_DIR; };
 		0396770927D514A200E0D2EF /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		0396771127D514BE00E0D2EF /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
 		0396771527D514D300E0D2EF /* SDL2_image.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_image.framework; path = ../../../../../../../../Library/Frameworks/SDL2_image.framework; sourceTree = "<group>"; };
+		03F6F01A27EF11AE0077B26B /* SDL_function.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SDL_function.cpp; sourceTree = "<group>"; };
+		03F6F01B27EF11AE0077B26B /* SDL_function.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SDL_function.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +71,10 @@
 			isa = PBXGroup;
 			children = (
 				0396770927D514A200E0D2EF /* main.cpp */,
+				0318453627F6E8A600223F29 /* C_function.cpp */,
+				0318453727F6E8A600223F29 /* C_function.hpp */,
+				03F6F01A27EF11AE0077B26B /* SDL_function.cpp */,
+				03F6F01B27EF11AE0077B26B /* SDL_function.hpp */,
 			);
 			path = LTNC_game;
 			sourceTree = "<group>";
@@ -135,7 +145,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0318453827F6E8A600223F29 /* C_function.cpp in Sources */,
 				0396770A27D514A200E0D2EF /* main.cpp in Sources */,
+				03F6F01C27EF11AE0077B26B /* SDL_function.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,6 +273,7 @@
 					"$(inherited)",
 					"$(LOCAL_LIBRARY_DIR)/Frameworks",
 				);
+				HEADER_SEARCH_PATHS = /Library/Frameworks/SDL2_image.framework/Headers;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -273,6 +286,7 @@
 					"$(inherited)",
 					"$(LOCAL_LIBRARY_DIR)/Frameworks",
 				);
+				HEADER_SEARCH_PATHS = /Library/Frameworks/SDL2_image.framework/Headers;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

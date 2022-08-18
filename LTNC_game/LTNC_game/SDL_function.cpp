@@ -11,6 +11,8 @@
 #include <SDL2/SDL.h>
 #include <SDL_image.h>
 #include <sstream>
+#include <SDL_ttf.h>
+#include <SDL_mixer.h>
 using namespace std;
 
 
@@ -65,6 +67,11 @@ void initSDL(SDL_Window* &window, SDL_Renderer* &renderer, const string title, c
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
         logSDLError(std::cout, "SDL_Init", true);
 
+    if( !SDL_SetHint( SDL_HINT_RENDER_SCALE_QUALITY, "1" ) )
+    {
+        cout << "Warning: Linear texture filtering not enabled!" << endl;
+    }
+    
     window = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_CENTERED,
        SDL_WINDOWPOS_CENTERED, screenWidth, screenHeight, SDL_WINDOW_SHOWN);
 //    window = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_CENTERED,
@@ -77,10 +84,22 @@ void initSDL(SDL_Window* &window, SDL_Renderer* &renderer, const string title, c
     //Khi thông thường chạy với môi trường bình thường ở nhà
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED |
                                               SDL_RENDERER_PRESENTVSYNC);
+    
     //Khi chạy ở máy thực hành WinXP ở trường (máy ảo)
     //renderer = SDL_CreateSoftwareRenderer(SDL_GetWindowSurface(window));
     if (renderer == nullptr) logSDLError(std::cout, "CreateRenderer", true);
-
+    SDL_SetRenderDrawColor( renderer, 0xFF, 0xFF, 0xFF, 0xFF );
+    int imgFlags = IMG_INIT_PNG;
+    if( !( IMG_Init( imgFlags ) & imgFlags ) )
+    {
+        printf( "SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError() );
+    }
+    
+    if( TTF_Init() == -1 )
+    {
+        printf( "SDL_ttf could not initialize! SDL_ttf Error: %s\n", TTF_GetError() );
+    }
+    Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 2048 );
     SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "linear");
     SDL_RenderSetLogicalSize(renderer, screenWidth, screenHeight);
 }
@@ -117,6 +136,74 @@ void waitUntilKeyPressed() {
             return;
         SDL_Delay(100);
     }
+}
+
+void renderPlayerCards(vector<SDL_Texture*> hand, int x, int y, SDL_Renderer *renderer) {
+    for (int i = 0; i < hand.size(); i++) {
+        renderTexture(hand[i], renderer, x, y, 100, 146);
+        x += 120;
+    }
+}
+
+int getPlayerChoicePlayOrRule() {
+    int choice = -1;
+    SDL_Event e;
+    Mix_Chunk *click = Mix_LoadWAV("/Users/phanviethung/Documents/Learn/UET/LTNC/Game/LTNC_game/LTNC_game/click.wav");
+    while (choice <= 0) {
+        SDL_Delay(10);
+        if (SDL_WaitEvent(&e) == 0) continue;
+        if ((e.type == SDL_QUIT) || (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_ESCAPE)) {
+//            unload_SDL_and_Images();
+            exit(1);
+        }
+        if ((e.type == SDL_MOUSEBUTTONDOWN)) {
+            if (e.button.x >= 178 && e.button.x <= 384 && e.button.y >= 598 && e.button.y <= 694) {
+                Mix_PlayChannel(-1, click, 0);
+                choice = 1;
+                return choice;
+                break;
+            }
+            if (e.button.x >= 178 && e.button.x <= 384 && e.button.y >= 478 && e.button.y <= 697) {
+                Mix_PlayChannel(-1, click, 0);
+                choice = 2;
+                cout << "Play" << endl;
+                return choice;
+            }
+        }
+    }
+    return choice;
+}
+
+void let_playler_choose_to_play_or_rule(SDL_Renderer *renderer, SDL_Texture *rule, SDL_Texture *menu) {
+    int choice = getPlayerChoicePlayOrRule();
+    while (choice != 2) {
+        if (choice == 1) {
+            SDL_Delay(150);
+            SDL_RenderClear(renderer);
+            renderTexture(rule, renderer, 0, 0, 1600, 1000);
+            SDL_RenderPresent(renderer);
+            SDL_Event e;
+            bool c = true;
+            while (c) {
+                SDL_Delay(10);
+                if (SDL_WaitEvent(&e) == 0) continue;
+                if ((e.type == SDL_QUIT) || (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_ESCAPE)) {
+                    exit(1);
+                }
+                if (e.type == SDL_MOUSEBUTTONDOWN) {
+                    if (e.button.x <= 134 && e.button.y <= 101) {
+                        SDL_RenderClear(renderer);
+                        renderTexture(menu, renderer, 0, 0);
+                        SDL_RenderPresent(renderer);
+                        c = false;
+                        break;
+                    }
+                }
+            }
+        }
+        choice = getPlayerChoicePlayOrRule();
+    }
+    SDL_RenderClear(renderer);
 }
 
 

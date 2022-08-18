@@ -14,6 +14,8 @@
 #include <vector>
 #include <sstream>
 #include <SDL_image.h>
+#include "SDL_text.hpp"
+#include "C_function.hpp"
 
 using namespace std;
 
@@ -24,12 +26,16 @@ void renderTexture(SDL_Texture *tex, SDL_Renderer *ren, int x, int y);
 void renderTexture(SDL_Texture *tex, SDL_Renderer *ren, int x, int y, int w, int h);
 void waitUntilKeyPressed();
 
-
-
 void quitSDL(SDL_Window* window, SDL_Renderer* renderer);
 void logSDLError(std::ostream& os,
                  const std::string &msg, bool fatal);
 void initSDL(SDL_Window* &window, SDL_Renderer* &renderer, const string title, const int screenWidth, const int screenHeight);
+
+void renderPlayerCards(vector<SDL_Texture*> hand, int x, int y, SDL_Renderer* renderer);
+
+int getPlayerChoicePlayOrRule();
+void let_playler_choose_to_play_or_rule(SDL_Renderer *renderer, SDL_Texture *rule, SDL_Texture *menu);
+
 
 
 #endif /* SDL_function_hpp */
